@@ -2,15 +2,31 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Mini Proyecto Render</title>
+  <title>Mini Proyecto Render Node</title>
 </head>
 <body>
-  <h1>Formulario de prueba</h1>
-  <form action="procesar.php" method="POST">
-    <label for="nombre">Nombre:</label>
+  <h1>Formulario con Node.js</h1>
+  <form id="formulario">
+    <label>Nombre:</label>
     <input type="text" name="nombre" required>
-    <br><br>
     <button type="submit">Enviar</button>
   </form>
+  <p id="resultado"></p>
+
+  <script>
+    document.getElementById('formulario').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const nombre = e.target.nombre.value;
+
+      const res = await fetch('/enviar', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nombre })
+      });
+
+      const data = await res.json();
+      document.getElementById('resultado').textContent = data.mensaje || data.error;
+    });
+  </script>
 </body>
 </html>
