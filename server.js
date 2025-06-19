@@ -1,3 +1,4 @@
+console.log("Inicio del servidor");
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
@@ -27,6 +28,7 @@ app.post('/enviar', async (req, res) => {
   }
 });
 
+console.log("Listo para escuchar");
 app.listen(PORT, () => {
   console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });
